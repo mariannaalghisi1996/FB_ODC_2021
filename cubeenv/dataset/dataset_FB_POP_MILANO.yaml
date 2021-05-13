@@ -1,9 +1,9 @@
 $schema: https://schemas.opendatacube.org/dataset
 
-id: d8af143a-8318-11eb-b298-a0c58923dc21
+id: 00000000-0000-0000-0000-202004050000
 
 product:
-  name: FB_POP_MILANO
+  name: FB_POI_MILANO
   href: https://dataforgood.fb.com/
   format: NetCDF
 
