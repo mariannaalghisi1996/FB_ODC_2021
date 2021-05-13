@@ -1,0 +1,32 @@
+$schema: https://schemas.opendatacube.org/dataset
+
+id: d8af143a-8318-11eb-b298-a0c58923dc21
+
+product:
+  name: FB_POP_MILANO
+  href: https://dataforgood.fb.com/
+  format: NetCDF
+
+crs: epsg:4326
+
+geometry:
+  type: Polygon
+  coordinates: [[[ 8.995056152343800, 45.311597470877999], [8.995056152343800, 45.627484179430269], [9.549865722656120, 45.627484179430269], [9.549865722656120, 45.311597470877999], [ 8.995056152343800, 45.311597470877999]]] 
+
+grids:
+  default:
+    shape: [102,83]
+    transform: [1,0,0,0,1,0,0,0,1]
+
+lineage: {}
+
+measurements:
+  n_crisis:
+    layer: n_crisis
+    path: C:/git/FB_ODC_2021/netcdf_files/2020-04-05 0000.nc
+    nodata: -9999
+
+properties:
+  odc:file_format: NetCDF
+  #odc:processing_datetime: 2021-03-16T18:02:54.188Z
+  datetime: 2021-01-15T13:00:00.000Z

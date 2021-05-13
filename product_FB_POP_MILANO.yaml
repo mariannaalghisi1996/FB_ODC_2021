@@ -1,0 +1,18 @@
+name: FB_POP_MILANO
+description: FB for good data about population
+metadata_type: eo
+
+metadata:
+    product:
+        name: FB_POP_MILANO
+        format: NetCDF
+
+storage:
+    crs: EPSG:4326
+    dimension_order: [latitude, longitude]
+    
+measurements:
+    - name: 'n_crisis'
+      dtype: float64
+      nodata: -9999
+      units: 'ug/m3'
