@@ -6,18 +6,19 @@ Created on Mon Apr 19 10:21:15 2021
 """
 
 import pandas as pd
-import numpy as np
 import glob
 import os
-import xarray as xr
+import shutil 
 
 
 def gridData(csvfiles):
+    # definition of the path to necessary folders and files:
+    grid_path = 'C:/git/FB_ODC_2021/griglia_csv/GRIGLIA_MILANO.csv'  
+    path_to_netcdf_folder = 'C:/git/FB_ODC_2021/netcdf_files'
+    origin = 'C:/git/FB_ODC_2021/empty_yaml.yaml'
     # 2) Once having determined the csv to upload we can proceed with the processing of the data
     #    First we need to upload the grid (for further details on grid realization see 'grid.py')
-    grid = pd.read_csv(r'C:/git/FB_ODC_2021/griglia_csv/GRIGLIA_MILANO.csv')
-    
-    path_to_netcdf_folder = 'C:/git/FB_ODC_2021/netcdf_files'
+    grid = pd.read_csv(grid_path)
     
     #    All the csv are loaded as pandas dataframe, then are joined to the grid on quadkey 
     gridded_csv = []
@@ -44,9 +45,25 @@ def gridData(csvfiles):
         print('ok',i,'gridded')
         temp_xarray = temp_gridded.to_xarray()
         print('ok',i,'to xarray')
-        temp_xarray.to_netcdf(path_to_netcdf_folder+'/'+datetime+'.nc')
+        netcdf_path = path_to_netcdf_folder+'/'+datetime+'.nc'
+        temp_xarray.to_netcdf(netcdf_path)
         print('ok',i,'in netcdf')
     
+        # REALIZATION OF yaml DATASET
+        datetime_string = datetime[0:10]+"T"+datetime[11]+datetime[12]+":"+datetime[13]+datetime[14]+":00.000Z"
+        PID = list(datetime)
+        PID.remove("-")
+        PID.remove("-")
+        PID.remove(" ")
+        PID = "".join(PID)
+        file1 = open(origin, "w")
+        to_write = "$schema: https://schemas.opendatacube.org/dataset \n \nid: 00000000-0000-0000-0000-"+PID+"\n\nproduct:\n  name: FB_POI_MILANO\n  href: https://dataforgood.fb.com/ \n  format: NetCDF\n\ncrs: epsg:4326\n\ngeometry:\n  type: Polygon\n  coordinates: [[[ 8.995056152343800, 45.311597470877999], [8.995056152343800, 45.627484179430269], [9.549865722656120, 45.627484179430269], [9.549865722656120, 45.311597470877999], [ 8.995056152343800, 45.311597470877999]]]\n\ngrids:\n  default:\n    shape: [102,83] \n    transform: [1,0,0,0,1,0,0,0,1]\n\nlineage: {}\n\nmeasurements:\n  n_crisis:\n    layer: n_crisis\n    path: "+netcdf_path+"\n    nodata: -9999\n\nproperties:\n  odc:file_format: NetCDF\n  datetime: "+datetime_string
+        file1.write(to_write)
+        file1.close()
+        target = "C:/git/FB_ODC_2021/cubeenv/dataset/"+PID+".yaml"
+        shutil.copy(origin, target)
+        #command = "datacube dataset add "+target
+        #os.system(command)
     # In conclusion the names of the new peocessed csv are now written in loaded_csv.txt 
     to_write_on_txt = ",".join(csvfiles)+','
     with open("loaded_csv.txt", "a") as output:
@@ -80,7 +97,7 @@ if len(csvfiles) != 0:
     print('Processing of CSVs is started...')
     ret = gridData(csvfiles)
     if ret == 'DONE!':
-        print('CSVs have been processed and transformed in NETCDF format')
+        print('CSVs have been processed and transformed in NETCDF format, metadata dataset have been created and correctly uploaded in ODC')
         
     else:
         print('Something whent wrong :(')
