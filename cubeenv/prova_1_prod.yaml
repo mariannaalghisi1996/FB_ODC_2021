@@ -1,0 +1,23 @@
+name: prova_1
+description: FB for good data about population
+metadata_type: eo3
+
+metadata:
+    product:
+        name: prova_1
+        format: NetCDF
+
+storage:
+    crs: EPSG:4326
+    dimension_order: [time, latitude, longitude]
+    
+measurements:
+    - name: 'n_crisis'
+      dtype: float64
+      nodata: -9999
+      units: 'people'
+
+    - name: 'quadkey'
+      dtype: int64
+      nodata: -9999
+      units: 'adimentional'

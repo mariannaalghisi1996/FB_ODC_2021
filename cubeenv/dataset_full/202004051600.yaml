@@ -1,9 +1,9 @@
 $schema: https://schemas.opendatacube.org/dataset 
  
-id: 00000000-0000-0000-0000-202004060000
+id: 00000000-0000-0000-0000-202004051600
 
 product:
-  name: prova_1
+  name: FB_POI_MILANO
   href: https://dataforgood.fb.com/ 
   format: NetCDF
 
@@ -21,15 +21,11 @@ grids:
 lineage: {}
 
 measurements:
-  quadkey:
-    layer: quadkey
-    path: C:/git/FB_ODC_2021/netcdf_files/2020-04-060000.nc
-    nodata: -9999
   n_crisis:
     layer: n_crisis
-    path: C:/git/FB_ODC_2021/netcdf_files/2020-04-060000.nc
+    path: C:/git/FB_ODC_2021/netcdf_files/2020-04-05 1600.nc
     nodata: -9999
 
 properties:
   odc:file_format: NetCDF
-  datetime: 2020-04-06T00:00:00.000Z
+  datetime: 2020-04-05T16:00:00.000Z
