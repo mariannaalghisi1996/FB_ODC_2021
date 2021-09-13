@@ -3,7 +3,7 @@ $schema: https://schemas.opendatacube.org/dataset
 id: 00000000-0000-0000-0000-202004050000
 
 product:
-  name: prova_1
+  name: MILAN
   href: https://dataforgood.fb.com/ 
   format: NetCDF
 
@@ -12,19 +12,16 @@ crs: epsg:4326
 geometry:
   type: Polygon
   coordinates: [[[ 8.995056152343800, 45.311597470877999], [8.995056152343800, 45.627484179430269], [9.549865722656120, 45.627484179430269], [9.549865722656120, 45.311597470877999], [ 8.995056152343800, 45.311597470877999]]]
+  crs: epsg::4326
 
 grids:
   default:
     shape: [102,83] 
-    transform: [1,0,0,0,1,0,0,0,1]
+    transform: [0.005493164062498224, 0.0, 8.99230957031255, 0.0, -0.0038522769335641825, 45.62941031789704, 0.0, 0.0, 1.0]
 
 lineage: {}
 
 measurements:
-  quadkey:
-    layer: quadkey
-    path: C:/git/FB_ODC_2021/netcdf_files/2020-04-050000.nc
-    nodata: -9999
   n_crisis:
     layer: n_crisis
     path: C:/git/FB_ODC_2021/netcdf_files/2020-04-050000.nc
