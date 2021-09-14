@@ -4,9 +4,13 @@ This project aims at developing an Open Data Cube instance to manage Facebook Da
 
 Requirements:
 - ODC Python environment
+   
   (installed through Anaconda --> https://datacube-core.readthedocs.io/en/latest/ops/install.html)
+  
 - PostGres database setup
+
   (we used pgAdmin UI, other references --> https://datacube-core.readthedocs.io/en/latest/ops/db_setup.html)
+  
 - Required python packages: jupyter, pandas, glob, os, shutil, xarray, matplotlib, numpy, ipywidgets
 
 Content of the folder:
@@ -20,6 +24,7 @@ Content of the folder:
 
 Processes and routine contained in jupyter notebook 'cubeenv/FULL NOTEBOOK.ipynb:
 1) Grid realization
+
    Process used for the realization of the grid that will be used for the gridding of the facebook data. 
    An example csv is loaded from the reference folder for the creation of the grid, starting from it we define grid's boundaries. The grid is realized as a pandas DataFrame.
    With a loop we insert in the dataframe all the points (latitude, longitude) of the grid.
@@ -27,6 +32,7 @@ Processes and routine contained in jupyter notebook 'cubeenv/FULL NOTEBOOK.ipynb
    IMPORTANT: since in the raw data there are some missing points, missing quadkeys have been added manually through QGIS.
 
 2) CSV gridding, transformation in NetCDF, metadata realization and upload on ODC
+
    A simple routine is implemented in order to check if there are new csv from Facebook in 'milan' folder. If new csvs are detected, the function gridData is called.
    gridData takes as input the list of the new csvs and process them: all the csv are loaded as pandas dataframe, then are joined to the grid on quadkey.
    The resulting grid will contain the following columns: time, latitude, longitude, n_crisis (where n_crisis contains the information about density population).
@@ -36,13 +42,16 @@ Processes and routine contained in jupyter notebook 'cubeenv/FULL NOTEBOOK.ipynb
    The process finishes with the update of the text file than contains the list of the csv already present in the database.
    
 3) General information about ODC
+
    Shows some general command used to inspect the content of the database (information on products).
    
 4) Loading data
+
    Focus on the usage of the load function (DataCube.load --> https://datacube-core.readthedocs.io/en/latest/dev/api/generate/datacube.Datacube.load.html )
    Some widgets are used in order to allow the user to specify his preferences on the time interval to analyze.
    
 5) Data Plotting
+
    Show an example on the possible computation and analysis that can be performed on the data:
    - Plot of mean/variance/median over time interval
    - Mean/variance/median of each point over time interval
